@@ -1,4 +1,3 @@
-var http = require("http");
 var express = require("express");
 const cors = require("cors");
 const app = express();
@@ -12,7 +11,6 @@ const port = 6700;
 server.listen(port, () => {
   console.log("Server listening at port %d", port);
 });
-
 app.use(express.static(path.join(__dirname, "public")));
 
 io.on("connection", (socket) => {
