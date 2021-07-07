@@ -1,14 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-// export const fetchData = createAsyncThunk("users/fetchData", async () => {
-//     const response = await fetch("https://api-pub.bitfinex.com/v2/ticker/tBTCUSD",{
-//         method:'GET',
-//         mode: 'no-cors',
-//     });
-//     const users = await response.json();
-//     console.log(users)
-//     return users;
-//   });
+import {createSlice } from "@reduxjs/toolkit";
 
 const DataSlice = createSlice({
     name:"data",
@@ -19,19 +9,10 @@ const DataSlice = createSlice({
         
     },
     extraReducers: {
-        // [fetchData.pending]: (state, action) => {
-        //         state.loading = true;
-        // },
-        // [fetchData.fulfilled]: (state, action) => {
-        //     state.loading = false;
-        //     state.listings = [...state.listings, ...action.payload];
-        // },
-        // [fetchData.rejected]: (state, action) => {
-        //     state.loading = false;
-        // },
+
     }
 });
 
-export const {} =DataSlice.actions;
+// export const {} =DataSlice.actions;
 
 export default DataSlice.reducer;

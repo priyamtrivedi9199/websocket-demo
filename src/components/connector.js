@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
 import { StyledButton } from "./components.styles";
 import WebSocket from "isomorphic-ws"; 
 
 export const Connector = () => {
   const w = new WebSocket("wss://api-pub.bitfinex.com/ws/2");
-  const [connected, setConnected] = useState("");
-  const [disconnected, setDisConnected] = useState("");
+  // const [connected, setConnected] = React.useState("");
+  // const [disconnected, setDisConnected] = React.useState("");
+  
   useEffect(() => {});
   const connect = () => {
     w.on =function open(event) {
