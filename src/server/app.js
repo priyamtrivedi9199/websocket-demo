@@ -22,4 +22,4 @@ app.get("/", (req, res) => {
 
 server.listen(port, (req, res) => {
   console.log("Server listening at port %d", port);
-});
+})

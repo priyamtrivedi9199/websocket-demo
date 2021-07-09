@@ -5,23 +5,11 @@ const App = () => {
   const w = new WebSocket("wss://api-pub.bitfinex.com/ws/2");
   const [socket, setSocket] = React.useState();
   React.useEffect(() => {}, []);
-  w.onopen = function (msg) {
-    w.send(msg);
-  };
+  w.onopen = function (msg) {};
 
-  w.onmessage = function (msg) {
-    console.log(msg.data)
-  };
+  w.onmessage = function (msg) {};
 
-  function GetData(data) {
-    return console.log(data)
-  }
-
-  return (
-    <div>
-      
-    </div>
-  );
+  return <div></div>;
 };
 
 export default App;
