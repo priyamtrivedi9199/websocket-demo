@@ -1,15 +1,36 @@
-import { getDefaultNormalizer } from "@testing-library/dom";
 import React from "react";
-var WebSocket = require("isomorphic-ws");
-const App = () => {
-  const w = new WebSocket("wss://api-pub.bitfinex.com/ws/2");
-  const [socket, setSocket] = React.useState();
-  React.useEffect(() => {}, []);
-  w.onopen = function (msg) {};
+import { connect } from "react-redux";
 
-  w.onmessage = function (msg) {};
+const App = connect(s => ({ ticker: s.ticker }))((props) => {
+  const { ticker } = props;
+  const empty_ticker = [0, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+  const [
+    CHANNEL_ID,
+    [
+      BID,
+      BID_SIZE,
+      ASK,
+      ASK_SIZE,
+      DAILY_CHANGE,
+      DAILY_CHANGE_PERC,
+      LAST_PRICE,
+      VOLUME,
+      HIGH,
+      LOW,
+    ],
+  ] = Array.isArray(ticker) ? ticker : empty_ticker;
 
-  return <div></div>;
-};
+  return (
+    <div>
+      <p>{VOLUME}</p>
+      <p>{LOW}</p>
+      <p>{LAST_PRICE}</p>
+      <p>{DAILY_CHANGE}</p>
+      <p>{DAILY_CHANGE_PERC}</p>
+      <p>{DAILY_CHANGE_PERC}</p>
+      <p>{HIGH}</p>
+    </div>
+  );
+});
 
 export default App;

@@ -1,25 +1,39 @@
-var express = require("express");
-var cors = require("cors");
-var path = require("path");
-var ws = require("ws");
-const app = express();
-app.use(cors());
-app.options("*", cors());
-const w = new ws("wss://api-pub.bitfinex.com/ws/2");
-const server = require("http").createServer(app);
-const port = 6700;
+import WS from "ws";
 
-let msg = JSON.stringify({
-  event: "subscribe",
-  channel: "ticker",
-  symbol: "tBTCUSD",
-});
-app.get("/", (req, res) => {
-  w.on("message", (msg) => res.send(msg));
-  // w.on("message", (msg) => msg);
-  w.on("open", () => res.send(msg));
-});
+function wsconnect({
+  saveTicker,
+  setConnectionStatus,
+  connectionStatus,
+}) {
+  const w = new WebSocket();
+  const pair = "BTCUSD"
+  let connected = false
+  w.onopen = function open() {
+    w.send(
+      JSON.stringify({
+        event: "subscribe",
+        channel: "ticker",
+        symbol: "tBTCUSD",
+      })
+    )
+  }
 
-server.listen(port, (req, res) => {
-  console.log("Server listening at port %d", port);
-})
+  w.onclose = function open() {
+    connected=false;
+  }
+
+  w.onmessage = function (message_part) {
+    var msg = message_part.data;
+    msg = JSON.parse(msg);
+    if (msg.event === "subscribed") {
+      channels[msg.channel] = msg.chanId;
+      console.log({ channels });
+    }
+    if (msg.event) return;
+    if (msg[0] === channels["ticker"]) {
+      Array.isArray(msg[1]) && saveTicker(msg);
+    }
+  };
+}
+
+export {connected,wsconnect}
