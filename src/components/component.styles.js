@@ -72,3 +72,7 @@ export const Wrapper = styled.div`
   height:600px;
   background-color: #1b262d;
 `;
+
+export const StyledHeader = styled.h4`
+color: green;
+`

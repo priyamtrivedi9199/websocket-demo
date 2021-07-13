@@ -14,6 +14,7 @@ import {
   BitCoinIcon,
   Container,
   Wrapper,
+  StyledHeader
 } from "../components/component.styles";
 
 const Ticker = connect((s) => ({ ticker: s.ticker }))((props) => {
@@ -44,19 +45,21 @@ const Ticker = connect((s) => ({ ticker: s.ticker }))((props) => {
   }, [connectionStatus]);
   const startConnection = () => !connectionStatus && setConnectionStatus(true);
   const stopConnection = () => connectionStatus && setConnectionStatus(false);
+  console.log({LAST_PRICE})
   return (
     <Wrapper>
       <Container>
         <BitCoinIcon>
           <IoLogoBitcoin />
+          <p>BTC/USD</p>
         </BitCoinIcon>
         <Side>
-          <h4>BTC/USD</h4>
-          <Line>VOL {VOLUME && numberWithCommas(VOLUME.toFixed(2))} USD</Line>
+          <StyledHeader>{BID}</StyledHeader>
+          <Line>VOL {VOLUME && numberWithCommas(Math.round(VOLUME * LAST_PRICE))} USD</Line>
           <Line>Low {LOW }</Line>
         </Side>
         <Side>
-          <h4>{LAST_PRICE && numberWithCommas(LAST_PRICE.toFixed(1))}</h4>
+          <StyledHeader>{LAST_PRICE && numberWithCommas(LAST_PRICE.toFixed(1))}</StyledHeader>
           <Line>
             <span className={DAILY_CHANGE_PERC < 0 ? `red` : "green"}>
               {DAILY_CHANGE && numberWithCommas(DAILY_CHANGE.toFixed(2))}
